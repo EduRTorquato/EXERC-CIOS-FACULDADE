@@ -1,0 +1,56 @@
+public class Personagem {
+    private int manaMax;
+    private int manAtual;
+    private int[] Bases;
+    private int[] nivelHabs;
+    private int exp;
+
+    Personagem(int manaMaxima, int manaBase0, int manaBase1, int manaBase2, int manaBase3) 
+    {
+        this.manaMax = manaMaxima;
+        manAtual = manaMaxima;
+        Bases = new int[]{manaBase0, manaBase1, manaBase2, manaBase3};
+        nivelHabs = new int[4];
+        exp = 100;
+    }
+
+    public void adicionarXP(int pontos) 
+    {
+        exp = exp+pontos;
+    }
+   
+     public int getNivel() {
+        return Math.min(exp / 100, 25);
+    }
+
+    public boolean melhorarHabilidade(int index)
+    {
+        if (nivelHabs[0]+nivelHabs[1]+nivelHabs[2]+nivelHabs[3]>=getNivel()) {
+            return false;
+        }
+        if (nivelHabs[index] >= 4) {
+            return false;
+        }
+        if (index >= 3 && (nivelHabs[index] >= 3 || getNivel() < 6)) {
+            return false;
+        }
+        nivelHabs[index]++;
+        return true;
+    }
+
+    public boolean usarHabilidade(int index) 
+    {
+        int gastoMana = nivelHabs[index]*Bases[index];
+        if(nivelHabs[index] == 0 || manAtual < gastoMana) {
+            return false;
+        }
+        manAtual -= gastoMana;
+        return true;
+    }
+
+    public void consumirPocao() 
+    {
+        manAtual = Math.min(manAtual + 350, manaMax); 
+    }
+    
+}

@@ -1,0 +1,42 @@
+public class Reacao {
+    private int a1;
+    private int a0;
+    private int b1;
+    private int b0;
+    private int c;
+    
+    
+    public Reacao(int f1, int f2)
+    {
+        this.a0 = f1;
+        this.b0 = f2;
+    
+    }
+
+    public void adicionarA(int a)
+    {
+       this.a1 += a;
+        
+    }
+    public void adicionarB(int b)
+    {
+       this.b1 += b;
+       
+      
+    }
+    public void agitar()
+    {
+         while(b1 >= b0 && a1 >= a0)
+    {     
+        b1-= this.b0;
+        a1-= this.a0;
+        c++;
+    }
+ }
+   
+     public int getC(){
+     return c;
+       }
+    
+    
+}
